@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <style>
+      body{
+  margin:10px;
+  font-size:14px;
+  font-family:Arial;
+}
+table{
+  border:1px solid #333;
+  border-collapse:collapse;
+  width:100%;
+}
+table tr td{
+  border:1px solid #333;
+  padding:10px;
+}
+table tr td span{
+  cursor:pointer;
+}
+table tr td span{
+  cursor:pointer;
+}
+</style>
+    <script src="https://code.angularjs.org/1.2.16/angular.js"></script>
+    <script>
+      angular.module('App', []).controller('CrudCtrl', ['$scope',
+  function($scope) {
+    $scope.Profiles = [
+        {
+          id : "Std01",
+          name : "ANU CHANDHINI",
+          mob : "6764534567",
+          age : "19",
+          email : "anu.bca.christuniversity.in",
+          course : "BCA",
+          editable : false
+        },
+        {
+          id : "Std02",
+          name : "BENSON SAM",
+          mob : "8524534067",
+          age : "22",
+          email : "bensonsam.mca.christuniversity.in",
+          course : "MCA",
+          editable : false
+        },
+        {
+          id : "Std03",
+          name : "MANESH INDHER",
+          mob : "9524588067",
+          age : "21",
+          email : "manesh.msc.christuniversity.in",
+          course : "MSC",
+          editable : false
+        },
+        {
+          id : "Std04",
+          name : "SHANKAR J",
+          mob : "7524034111",
+          age : "24",
+          email : "shankarj.arts.christuniversity.in",
+          course : "ARTS",
+          editable : false
+        },
+        {
+          id : "Std05",
+          name : "SAMUEL L",
+          mob : "7111534067",
+          age : "20",
+          email : "samuel.mca.christuniversity.in",
+          course : "ECONOMICS",
+          editable : false
+        },
+        {
+          id : "Std06",
+          name : "YAVANIKA KHAN",
+          mob : "95240004067",
+          age : "23",
+          email : "yavanika.arts.christuniversity.in",
+          course : "ARTS",
+          editable : false
+        }
+      ];
+   
+   $scope.entity = {}
+      
+   $scope.edit = function(index){
+     $scope.entity = $scope.Profiles[index];
+     $scope.entity.index = index;
+     $scope.entity.editable = true;
+   }
+      
+   $scope.delete = function(index){
+     $scope.Profiles.splice(index,1);
+   }
+      
+   $scope.save = function(index){
+     $scope.Profiles[index].editable = false;
+     
+   }
+      
+   $scope.add = function(){
+     $scope.Profiles.push({
+        name : "",
+        country : "",
+        editable : true
+     })
+   }
+  }
+]);
+    </script>
+    <title>CHRIST UNIVERSITY</title>
+  </head>
+
+  <body ng-app="App">
+    <h1><u>STUDENT RECORDS</u></h1>
+  <div ng-controller="CrudCtrl">
+    <table>
+      <tr>
+        <td>Id</td>
+        <td>Name</td>
+        <td>Mob</td>
+        <td>Age</td>
+        <td>Email</td>
+        <td>Course</td>
+        <td><span ng-click="add()">Add New</span></td>
+      </tr>
+      <tr ng-repeat="profile in Profiles">
+        <td>
+          <input type="text" ng-model="profile.id" ng-show="profile.editable">
+          <span ng-hide="profile.editable">{{ profile.id }}</span>
+        </td>
+        <td>
+          <input type="text" ng-model="profile.name" ng-show="profile.editable">
+          <span ng-hide="profile.editable">{{ profile.name }}</span>
+        </td>
+        <td>
+          <input type="text" ng-model="profile.mob" ng-show="profile.editable">
+          <span ng-hide="profile.editable">{{ profile.mob }}</span>
+        </td>
+        <td>
+          <input type="text" ng-model="profile.age" ng-show="profile.editable">
+          <span ng-hide="profile.editable">{{ profile.age }}</span>
+        </td>
+        <td>
+          <input type="text" ng-model="profile.email" ng-show="profile.editable">
+          <span ng-hide="profile.editable">{{ profile.email }}</span>
+        </td>
+        <td>
+          <input type="text" ng-model="profile.course" ng-show="profile.editable">
+          <span ng-hide="profile.editable">{{ profile.course }}</span>
+        </td>
+        <td>
+          <span ng-click="edit($index)" ng-hide="profile.editable">Edit</span>
+          <span ng-click="save($index)" ng-show="profile.editable">Save</span>
+          <span ng-click="delete($index)"> | Delete</span>
+        </td>
+      </tr>
+    </table>
+  </div>
+  </body>
+
+</html>
